@@ -1,52 +1,41 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import { TOKEN_POST, USER_GET } from '../../api';
 import useForm from '../../Hooks/useForm';
 import Button from '../Forms/Button';
 import Input from '../Forms/Input';
-// import { UserContext } from '../../UserContext';
+import Error from '../Helper/Error';
+import { UserContext } from '../../UserContext';
+import styles from './LoginForm.module.css';
+import stylesBtn from '../Forms/Button.module.css';
 
 const LoginForm = () => {
   const username = useForm();
   const password = useForm();
-  // const context = React.useContext(UserContext);
-
-  React.useEffect(() => {
-    const token = window.localStorage.getItem('token');
-    if (token) getUser(token);
-  }, [])
-
-  async function getUser(token) {
-    const { url, options } = USER_GET(token);
-    const response = await fetch(url, options);
-    const json = await response.json();
-    console.log(json);
-  }
+  const { userLogin, error, loading } = React.useContext(UserContext);
 
   async function handleLogin(event) {
     event.preventDefault();
 
     if (username.validate() && password.validate()) {
-      const { url, options } = TOKEN_POST({
-        username: username.value,
-        password: password.value
-      });
-      const response = await fetch(url, options);
-      const json = await response.json();
-      window.localStorage.setItem('token', json.token);
-      getUser(json.token);
+      userLogin(username.value, password.value);
     }
   }
 
   return (
-    <section>
-      <h1>Login</h1>
-      <form onSubmit={handleLogin}>
+    <section className='animeLeft'>
+      <h1 className='title'>Login</h1>
+      <form onSubmit={handleLogin} className={styles.form}>
         <Input label="User" type='text' name='username' {...username} />
         <Input label="Password" type='password' name='password' {...password} />
-        <Button>Login</Button>
+        {loading ? <Button disabled>Loading...</Button> : <Button>Login</Button>}
+        <Error error={error} />
       </form>
-      <Link to='/login/create'>Registration</Link>
+      <Link to='/login/create' className={styles.lost}>Forgot password?</Link>
+      <div className={styles.registry}>
+        <h2 className={styles.subtitle}>Registry</h2>
+        <p>Dont have account?</p>
+        <Link to='/login/create' className={stylesBtn.button}>Registration</Link>
+      </div>
     </section>
   )
 }
