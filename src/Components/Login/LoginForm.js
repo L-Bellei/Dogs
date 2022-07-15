@@ -4,10 +4,12 @@ import { TOKEN_POST, USER_GET } from '../../api';
 import useForm from '../../Hooks/useForm';
 import Button from '../Forms/Button';
 import Input from '../Forms/Input';
+// import { UserContext } from '../../UserContext';
 
 const LoginForm = () => {
   const username = useForm();
   const password = useForm();
+  // const context = React.useContext(UserContext);
 
   React.useEffect(() => {
     const token = window.localStorage.getItem('token');
