@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Header.module.css';
 import { ReactComponent as Dogs } from '../Assets/dogs.svg';
@@ -11,7 +11,7 @@ const Header = () => {
         <Link className={styles.login} to='/login'>Login / Create</Link>
       </nav>
     </header>
-  )
+  );
 }
 
-export default Header
+export default Header;
