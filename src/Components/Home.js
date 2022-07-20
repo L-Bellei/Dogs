@@ -1,9 +1,14 @@
-import React from 'react'
+import React from 'react';
+import Feed from './Feed/Feed';
+import Head from './Helper/Head';
 
 const Home = () => {
   return (
-    <div>Home</div>
-  )
+    <section className='container mainContainer'>
+      <Head title='Photos' description='Principal feed dogs photos' />
+      <Feed />
+    </section>
+  );
 }
 
 export default Home

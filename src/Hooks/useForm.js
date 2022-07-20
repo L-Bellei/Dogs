@@ -8,6 +8,10 @@ const types = {
   password: {
     regex: /^(?=(?:.*?[A-Z]){0})(?=(?:.*?[0-9]){1})(?=(?:.*?[!@#$%*()_+^&}{:;?.]){0})(?!.*\s)[0-9a-zA-Z!@#$%;*(){}_+^&]*$/,
     message: 'the password must contain at least 8 characters, 1 digit and 1 special character'
+  },
+  number: {
+    regex: /^\d+$/,
+    message: 'Only insert numbers',
   }
 }
 
